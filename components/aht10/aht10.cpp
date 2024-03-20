@@ -58,6 +58,12 @@ void AHT10Component::setup() {
     this->mark_failed();
     return;
   }
+  
+ 
+  ESP_LOGE(TAG, "sizeof(init_cmd)::%d", sizeof(init_cmd));
+
+
+  
   uint8_t data = AHT10_STATUS_BUSY;
   int cal_attempts = 0;
   while (data & AHT10_STATUS_BUSY) {
