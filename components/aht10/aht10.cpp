@@ -58,12 +58,6 @@ void AHT10Component::setup() {
     this->mark_failed();
     return;
   }
-  
- 
-  ESP_LOGE(TAG, "sizeof(init_cmd)::%d", sizeof(init_cmd));
-
-
-  
   uint8_t data = AHT10_STATUS_BUSY;
   int cal_attempts = 0;
   while (data & AHT10_STATUS_BUSY) {
@@ -162,6 +156,11 @@ void AHT10Component::update() {
 float AHT10Component::get_setup_priority() const { return setup_priority::DATA; }
 
 void AHT10Component::dump_config() {
+  const uint8_t *init_cmd;
+  init_cmd = AHT10_INITIALIZE_CMD;
+  ESP_LOGE(TAG, "sizeof(init_cmd)::%d", sizeof(init_cmd));
+  
+  
   ESP_LOGCONFIG(TAG, "AHT10:");
   LOG_I2C_DEVICE(this);
   if (this->is_failed()) {
